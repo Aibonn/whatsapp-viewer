@@ -359,7 +359,10 @@ void MainWindow::openDatabase()
 
 			if (!isPlainWhatsappDatabase(*filename))
 			{
-				decryptWhatsappDatabase5(*filename, tempFilename, openDatabaseStruct.accountName);
+				unsigned char key[24];
+				buildKey(key, openDatabaseStruct.accountName);
+
+				decryptWhatsappDatabase5(*filename, tempFilename, key);
 				filename = &tempFilename;
 			}
 
@@ -429,7 +432,10 @@ void MainWindow::decryptDatabaseCrypt5()
 	{
 		try
 		{
-			decryptWhatsappDatabase5(openDatabaseStruct.filename, "msgstore.decrypted.db", openDatabaseStruct.accountName);
+			unsigned char key[24];
+			buildKey(key, openDatabaseStruct.accountName);
+
+			decryptWhatsappDatabase5(openDatabaseStruct.filename, "msgstore.decrypted.db", key);
 
 			lastDatabaseOpened = openDatabaseStruct;
 			settings.write("lastOpenedFile", lastDatabaseOpened.filename);

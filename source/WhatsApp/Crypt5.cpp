@@ -86,10 +86,3 @@ void decryptWhatsappDatabase5(const std::string &filename, const std::string &fi
 
 	delete[] databaseBytes;
 }
-
-void decryptWhatsappDatabase5(const std::string &filename, const std::string &filenameDecrypted, const std::string &accountName)
-{
-	unsigned char key[24];
-	buildKey(key, accountName);
-	decryptWhatsappDatabase5(filename, filenameDecrypted, key);
-}

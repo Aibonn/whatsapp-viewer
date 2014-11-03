@@ -26,10 +26,12 @@ void decrypt5(const std::vector<std::string *> arguments)
 	}
 	
 	std::string &databaseFilename = *arguments[2];
-	std::string &accountName = *arguments[3];
+	std::string &accountname = *arguments[3];
 	std::string &outputFilename = *arguments[4];
 
-	decryptWhatsappDatabase5(databaseFilename, outputFilename, accountName);
+	unsigned char key[24];
+	buildKey(key, accountname);
+	decryptWhatsappDatabase5(databaseFilename, outputFilename, key);
 }
 
 void decrypt7(const std::vector<std::string *> arguments)
